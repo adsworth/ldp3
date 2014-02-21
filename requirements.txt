@@ -1,0 +1,15 @@
+Django==1.6.2
+Pillow==2.3.0
+South==0.8.4
+argparse==1.2.1
+django-flatblocks==0.8
+django-floppyforms==1.1.1
+django-guardian==1.1.1
+django-markdown-deux==1.0.4
+django-userena==1.2.4
+django-zurb-foundation==5.1.1
+easy-thumbnails==1.4
+html2text==3.200.3
+markdown2==2.2.0
+six==1.5.2
+wsgiref==0.1.2
