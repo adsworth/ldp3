@@ -11,5 +11,6 @@ django-zurb-foundation==5.1.1
 easy-thumbnails==1.4
 html2text==3.200.3
 markdown2==2.2.0
+psycopg2==2.5.2
 six==1.5.2
 wsgiref==0.1.2
