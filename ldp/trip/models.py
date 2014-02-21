@@ -3,8 +3,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from lib.choices import Choices
-from lib.human import seconds_to_human
+from utils.choices import Choices
+from utils.human import seconds_to_human
 
 from django.conf import settings
 

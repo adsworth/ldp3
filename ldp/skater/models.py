@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 
 from userena.models import UserenaBaseProfile
 
-from lib.human import seconds_to_human
+from utils.human import seconds_to_human
 
 class SkaterProfile(UserenaBaseProfile):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
