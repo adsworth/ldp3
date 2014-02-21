@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="large-12 columns">
+    {% include "floppyforms/errors.html" with errors=trip_form.type.errors %}
+    {{ trip_form.type.label_tag }}
+    {{ trip_form.type }}
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    {{ trip_form.start.label_tag }}
+    {{ trip_form.start }}
+    {% include "floppyforms/errors.html" with errors=trip_form.start.errors %}
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    {{ trip_form.end.label_tag }}
+    {{ trip_form.end }}
+    {% include "floppyforms/errors.html" with errors=trip_form.end.errors %}
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    {{ trip_form.distance.label_tag }}
+    {{ trip_form.distance }} {{ user.profile.get_unit_of_measure_display }}
+    {% include "floppyforms/errors.html" with errors=trip_form.distance.errors %}
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    {{ trip_form.notes.label_tag }}
+    {{ trip_form.notes }}
+    {% include "floppyforms/errors.html" with errors=trip_form.notes.errors %}
+  </div>
+</div>
+

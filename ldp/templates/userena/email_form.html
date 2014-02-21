@@ -1,0 +1,16 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block profile_content_title %}<h2>{% blocktrans with user.username as username %}Change password for &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
+
+{% block profile_content %}
+<form action="" method="post">
+  {% csrf_token %}
+  <fieldset>
+    <legend>{% trans "Change email address" %}</legend>
+    {{ form.as_p }}
+  </fieldset>
+  <input type="submit" value="{% trans "Change email" %}" />
+</form>
+{% endblock %}

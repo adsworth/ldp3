@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load l10n %}
+{% load url from future %}
+{% block title %}Trip - {{ block.super }}{% endblock title %}
+{% block content_title %}<h2>Trip</h2>{% endblock content_title %}
+{% block content %}
+    <div class="row">
+      <div class="large-2 columns small-3">
+        <a href="{% url 'userena_profile_detail' trip.skater.username %}">
+          <img src="{{ trip.skater.profile.get_mugshot_url }}">
+        </a>
+        </div>
+      <div class="large-1 columns">
+        <p>
+          <a href="{% url 'userena_profile_detail' trip.skater.username %}">
+            <strong>{{ trip.skater.username }}</strong>
+          </a></p>
+          {% if trip.skater = request.user %}
+            <a href="{% url 'trip_edit' trip.id %}">Edit</a>
+          {% endif %}
+
+      </div>
+      <div class="large-9 columns">
+        <table>
+          <thead>
+            <tr>
+              <th>Start</th>
+              <th>End</th>
+              <th>Duration</th>
+              <th>Distance</th>
+              <th>Avg. Speed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-right">
+                  {{ trip.start|localize }}
+                </td>
+              <td class="text-right">{{ trip.end|localize }}</td>
+              <td class="text-right">{{ trip.duration_human }}</td>
+              <td class="text-right">{{ trip.distance|localize }} {{ request.user.profile.get_unit_of_measure_display }}</td>
+              <td class="text-right">{{ trip.avg_speed|localize }} {{ request.user.profile.get_unit_of_measure_display }}/h</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr>
+{% endblock %}

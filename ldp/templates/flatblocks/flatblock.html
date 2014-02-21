@@ -1,0 +1,10 @@
+{% load markdown_deux_tags %}
+<div class="flatblock block-{{ flatblock.slug }}">
+{% if flatblock.header %}
+    <h2 class="flatblock-title">{{ flatblock.header }}</h2>
+{% endif %}
+    <div class="flatblock-content">
+    {{ flatblock.content|markdown }}</div>
+</div>
+
+

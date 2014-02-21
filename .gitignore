@@ -34,3 +34,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+#WingIDE
+*.wp[ur]
+
+db.sqlite
+secrets.json

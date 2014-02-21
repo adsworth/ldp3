@@ -1,0 +1,65 @@
+{% extends 'userena/base_userena.html' %}
+{% load i18n %}
+{% load url from future %}
+{% block title %}{{ profile.user.get_full_name }} - {{ block.super }}{% endblock title %}
+{% block profile_content %}
+    <div id="details">
+      {% block profile_details %}
+        <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
+        <dl>
+          {% block profile_definition_list %}
+              <dt>{% trans "Nickname" %}</dt>
+              <dd>{{ profile.user.username }}</dd>
+            {% if profile.user.get_full_name %}
+              <dt>{% trans "Name" %}</dt>
+              <dd>{{ profile.user.get_full_name }}</dd>
+            {% endif %}
+            {% if profile.user.email and not hide_email %}
+              <dt>{% trans "Email" %}</dt>
+              <dd>{{ profile.user.email }}</dd>
+            {% endif %}
+            {% if profile.age %}
+              <dt>{% trans "Age" %}</dt>
+              <dd>{{ profile.age }}</dd>
+            {% endif %}
+            {% if profile.website %}
+              <dt>{% trans "Website" %}</dt>
+              <dd>{{ profile.website|urlize }}</dd>
+            {% endif %}
+            {% if profile.location %}
+              <dt>{% trans "Location" %}</dt>
+              <dd>{{ profile.location }}</dd>
+            {% endif %}
+            {% if profile.about_me %}
+              <dt>{% trans "About me" %}</dt>
+              <dd>{{ profile.about_me }}</dd>
+            {% endif %}
+            {% if profile.gear %}
+              <dt>{% trans "Skate Gear" %}</dt>
+              <dd>{{ profile.gear }}</dd>
+            {% endif %}
+          {% endblock %}
+        </dl>
+      {% endblock %}
+        <table>
+          <thead>
+            <tr>
+              <th>{% trans "Total Trips" %}</th>
+              <th>{% trans "Total Distance" %}</th>
+              <th>{% trans "Total Duration" %}</th>
+              <th>{% trans "Avg. Speed" %}</th>
+              <th>{% trans "Avg. Distance" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-right">{{ profile.number_of_trips }}</td>
+              <td class="text-right">{{ profile.total_distance }} {{ profile.get_unit_of_measure_display }}</td>
+              <td class="text-right">{{ profile.total_duration_human }}</td>
+              <td class="text-right">{{ profile.avg_speed }} {{ profile.get_unit_of_measure_display }}/h</td>
+              <td class="text-right">{{ profile.avg_distance }} {{ profile.get_unit_of_measure_display }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+{% endblock %}

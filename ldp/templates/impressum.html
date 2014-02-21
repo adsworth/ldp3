@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% load flatblock_tags %}
+{% block title %}Impressum - {{ block.super }}{% endblock title %}
+{% block content %}
+{% flatblock "page.impressum" %}
+{% endblock content %}

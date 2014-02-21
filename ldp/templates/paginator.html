@@ -1,0 +1,16 @@
+{% load url from future %}
+<ul class="pagination">
+  {% if page_obj.has_previous %}
+    <li class="arrow "><a href="{% url url_name %}?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+  {% else %}
+    <li class="arrow unavailable">&laquo;</li>
+  {% endif %}
+  {% for p in paginator.page_range %}
+    <li class="current"><a href="{% url url_name %}?page={{ p }}">{{ p }}</a></li>
+  {% endfor %}
+  {% if page_obj.has_next %}
+    <li class="arrow"><a href="{% url url_name %}?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+  {% else %}
+    <li class="arrow unavailable">&raquo;</li>
+  {% endif %}
+</ul>

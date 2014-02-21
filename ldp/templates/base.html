@@ -1,0 +1,102 @@
+{% extends 'foundation/base.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load trip_tags %}
+{% block css %}
+ <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css"/>
+{% endblock css %}
+{% block title %}LDP³{% endblock title %}
+{% block base_body %}
+    <!-- Header and Nav -->
+    <div class="contain-to-grid ">
+      <nav class="top-bar" data-topbar>
+       <ul class="title-area">
+         <li class="name">
+           <h1><a href="{% url 'home' %}">LDP³</a></h1>
+         </li>
+         <li class="toggle-topbar menu-icon">
+           <a href="#">Menu</a>
+         </li>
+       </ul>
+       <section class="top-bar-section"> 
+         <!-- Right Nav Section -->
+         <ul class="right button-group radius">
+           {% if user.is_authenticated  and user.username %}
+             <li><a class="button" href="{% url 'userena_profile_detail' user.username %}">{{ user.username }}</a></li>
+           {% endif %}
+          <li>
+           {% if not user.is_authenticated %}
+             <a class="button" href="{% url 'userena_signin' %}?n={{ request.path }}">Login</a>
+           {% else %}
+             <a class="button" href="{% url 'userena_signout' %}">Logout</a>
+           {% endif %}
+          </li>
+           {% if user.is_staff %}
+          <li><a class="button" href="{% url 'admin:index' %}">Admin</a></li>
+           {% endif %}
+         </ul>
+       </nav>
+      </div>
+  <!-- End Header and Nav -->
+  <div class="row">
+ <!-- Nav Sidebar -->
+    <!-- This is source ordered to be pulled to the left on larger screens -->
+    <div class="large-3 columns ">
+      <div class="panel">
+        <h1>LDP³</h1>
+        <p class="right">(Push|Pump|Paddle)</p>
+        <p>&nbsp;</p>
+      </div>
+      <div class="panel">
+      {% block navigation %}
+        <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+          <section class="section">
+            <h5 class="title"><a href="{% url 'userena_profile_list' %}">Skaters</a></h5>
+          </section>
+          <section class="section">
+            <h5 class="title"><a href="{% url 'trip_list' %}">Trips</a></h5>
+          </section>
+        </div>
+       {% endblock navigation %}
+     </div>
+      {% block side_panel %}
+        {% if request.user.is_authenticated %}
+          <div class="panel">
+           <h5>add a new trip</h5>
+           <form action="{% url 'trip_create' %}" method="post">
+           {% csrf_token %}
+           {% trip_create_form request.user %}
+           <input type="submit" name="create" value="create">
+           </form>
+          </div>
+        {% endif %}
+      {% endblock side_panel %}
+    </div>
+    
+    <!-- Main Feed -->
+    <!-- This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
+    <div class="large-9 columns">
+      <div class="panel">
+      {% block content_title %}{% endblock content_title %}
+      {% block content %}{% endblock content %}
+      </div>
+    </div>
+  <!-- Footer -->
+ 
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-5 columns">
+          <p>©Adi J. Sieker 2014.</p>
+        </div>
+        <div class="large-7 columns">
+          <ul class="inline-list right">
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'impressum' %}">Impressum</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+{% endblock base_body %}
