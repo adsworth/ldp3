@@ -30,6 +30,7 @@ DEBUG = not PRODUCTION
 TEMPLATE_DEBUG = DEBUG
 
 if PRODUCTION:
+    FORCE_SCRIPT_NAME = ''
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
