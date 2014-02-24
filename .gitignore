@@ -38,5 +38,5 @@ nosetests.xml
 #WingIDE
 *.wp[ur]
 
-db.sqlite
+db.sqlite*
 secrets.json
