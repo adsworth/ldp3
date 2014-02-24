@@ -12,7 +12,7 @@
          <form action="" method="post">
            {% csrf_token %}
            {% include "trip/create_form.html" with trip_form=form user=request.user %}
-         <input type="submit" name="create" value="create">
+         <input type="submit" name="create" value="{% if form.instance.id%}update{% else %}create{% endif %}">
          </form>
       </div>
     </div>

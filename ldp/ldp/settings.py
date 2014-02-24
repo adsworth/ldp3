@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # nicked from the djangoproject website repository.
 # Far too clever trick to know if we're running on the deployment server.
-PRODUCTION = ('DJANGOPROJECT_DEBUG' not in os.environ)
+PRODUCTION = ('WINGDB_ACTIVE' not in os.environ)
 
 # It's a secret to everybody
 with open(os.path.join(BASE_DIR, '../secrets.json')) as handle:

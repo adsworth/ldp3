@@ -1,12 +1,13 @@
+from datetime import timedelta
+
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 
 from userena.models import UserenaBaseProfile
 
-from utils.human import seconds_to_human
+from timedelta.helpers import nice_repr
 
 class SkaterProfile(UserenaBaseProfile):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
@@ -32,11 +33,14 @@ class SkaterProfile(UserenaBaseProfile):
 
     @cached_property
     def total_duration(self):
-        return self.user.trips.all().aggregate(models.Sum('duration'))['duration__sum']
+        _total = timedelta(0)
+        for t in self.user.trips.all():
+            _total = _total + t.duration
+        return _total
 
     @cached_property
     def total_duration_human(self):
-        return seconds_to_human(self.total_duration)
+        return nice_repr(self.total_duration)
 
     @cached_property
     def total_distance(self):
@@ -48,4 +52,4 @@ class SkaterProfile(UserenaBaseProfile):
     
     @cached_property
     def avg_speed(self):
-        return "%0.2f" %(self.total_distance / self.total_duration * ( 60 *60 ))
+        return "%0.2f" %(self.total_distance / self.total_duration.seconds * ( 60 *60 ))

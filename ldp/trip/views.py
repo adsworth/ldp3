@@ -10,7 +10,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
 
-from trip.forms import TripForm
+from trip.forms.forms import TripForm
 from trip.models import Trip
 
 class SortMixin(object):

@@ -1,10 +1,9 @@
-from django.forms import ModelForm, SplitDateTimeWidget
+from django import forms
 from django.forms.util import to_current_timezone
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
 
 import floppyforms 
-
-from trip.models import Trip
-
 
 class SplitDateTimeWidget(floppyforms.MultiWidget):
     def __init__(self, attrs=None, date_format=None, time_format=None,
@@ -37,12 +36,3 @@ class SplitDateTimeWidget(floppyforms.MultiWidget):
             return [value.date(), value.time().replace(microsecond=0)]
         return [None, None]
 
-class TripForm(floppyforms.ModelForm):
-    class Meta:
-        model = Trip
-        exclude = ['skater', 'duration', 'avg_speed']
-        localized_fields = ('start', 'end', 'distance')
-        widgets = {
-            'start': SplitDateTimeWidget(date_placeholder="DD.MM.YYYY", time_placeholder="HH:MM"),
-            'end': SplitDateTimeWidget(date_placeholder="DD.MM.YYYY", time_placeholder="HH:MM"),
-        }

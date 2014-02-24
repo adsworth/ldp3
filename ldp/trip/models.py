@@ -8,6 +8,8 @@ from utils.human import seconds_to_human
 
 from django.conf import settings
 
+from timedelta.fields import TimedeltaField
+from timedelta.helpers import nice_repr
 
 class Trip(models.Model):
     TYPE_CHOICES = Choices((
@@ -21,29 +23,24 @@ class Trip(models.Model):
     type = models.CharField(verbose_name=_('Type'), max_length=6, choices=TYPE_CHOICES, default=TYPE_CHOICES.PUMP)
     
     start = models.DateTimeField(verbose_name=_('Start time'))
-    end = models.DateTimeField(verbose_name=_('End time'))
+    end = models.DateTimeField(verbose_name=_('End time'), editable=False)
     
     distance = models.DecimalField(verbose_name=_('Distance'), max_digits=5, decimal_places=2)
 
     notes = models.TextField(verbose_name=_('Notes'), default='', blank=True)
 
-    duration = models.IntegerField(verbose_name=_('Duration'), editable=False)
+    duration = TimedeltaField(verbose_name=_('Duration'))
     avg_speed = models.DecimalField(_('Avg. Speed'), max_digits=5, decimal_places=2, editable=False)
 
     class Meta:
         ordering = ['-start']
 
-    def clean(self):
-        if self.start >= self.end:
-            raise ValidationError("Start date ends to be before end date")
-
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
-        delta = self.end - self.start
-        self.duration = delta.seconds
         
-        tick = self.distance / self.duration
+        self.end = self.start + self.duration
+        
+        tick = self.distance / self.duration.seconds
         
         self.avg_speed = tick * 60 * 60
 
@@ -57,4 +54,4 @@ class Trip(models.Model):
         return reverse('trip_detail', kwargs={'pk':self.id})
     
     def duration_human(self):
-        return seconds_to_human(self.duration)
+        return nice_repr(self.duration)

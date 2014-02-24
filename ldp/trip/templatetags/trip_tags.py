@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 from django import template
 
-from trip.forms import TripForm
+from trip.forms.forms import TripForm
 register = template.Library()
 
 @register.inclusion_tag('trip/create_form.html')
