@@ -20,16 +20,15 @@
           <img src="{{ profile.get_mugshot_url }}">
         </a>
         </div>
-      <div class="large-1 columns">
+      <div class="large-10 columns">
         <p>
           <a href="{% url 'userena_profile_detail' profile.user.username %}">
             <strong>{{ profile.user.username }}</strong>
         </a>
-        </p>
-      </div>
-      <div class="large-9 columns">
+        <br>
         skated {{ profile.total_distance }} {{ profile.get_unit_of_measure_display }} in {{ profile.total_duration_human }} during {{ profile.number_of_trips }} trip.<br>
         That's an average speed of {{ profile.avg_speed }} {{ profile.get_unit_of_measure_display }}/h and an average of {{ profile.avg_distance }} {{ profile.get_unit_of_measure_display }} per trip.
+        </p>
       </div>
     </div>
     <hr>

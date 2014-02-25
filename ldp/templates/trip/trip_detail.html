@@ -11,17 +11,12 @@
           <img src="{{ trip.skater.profile.get_mugshot_url }}">
         </a>
         </div>
-      <div class="large-1 columns">
+      <div class="large-10 columns">
         <p>
           <a href="{% url 'userena_profile_detail' trip.skater.username %}">
             <strong>{{ trip.skater.username }}</strong>
-          </a></p>
-          {% if trip.skater = request.user %}
-            <a href="{% url 'trip_edit' trip.id %}">Edit</a>
-          {% endif %}
-
-      </div>
-      <div class="large-9 columns">
+          </a>
+        </p>
         <table>
           <thead>
             <tr>
@@ -44,6 +39,11 @@
             </tr>
           </tbody>
         </table>
+        <p class="text-right">
+          {% if trip.skater = request.user %}
+            <a href="{% url 'trip_edit' trip.id %}">Edit</a>
+          {% endif %}
+        </p>
       </div>
     </div>
     <hr>

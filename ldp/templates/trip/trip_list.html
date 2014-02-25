@@ -21,30 +21,32 @@
           <img src="{{ trip.skater.profile.get_mugshot_url }}">
         </a>
         </div>
-      <div class="large-1 columns">
+      <div class="large-10 columns">
         <p>
           <a href="{% url 'userena_profile_detail' trip.skater.username %}">
             <strong>{{ trip.skater.username }}</strong>
           </a></p>
-      </div>
-      <div class="large-9 columns">
-        <table>
+        <table width="100%">
           <thead>
             <tr>
-              <th>Start</th>
-              <th>End</th>
-              <th>Duration</th>
-              <th>Distance</th>
-              <th>Avg. Speed</th>
+              <th width="25%">Start</th>
+              <th width="25%">End</th>
+              <th class="text-right" width="20%">Duration</th>
+              <th class="text-right" width="17%">Distance</th>
+              <th nowrap width="13%" >Avg. Speed</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="text-right"><a href="{% url 'trip_detail' trip.id %}">{{ trip.start }}</a></td>
-              <td class="text-right">{{ trip.end }}</td>
+              <td nowrap class="text-right">
+                <a href="{% url 'trip_detail' trip.id %}">
+                  {{ trip.start.date }}<br>{{ trip.start.time }}
+                </a>
+              </td>
+              <td class="text-right">{{ trip.end.date }}<br>{{ trip.end.time }}</td>
               <td class="text-right">{{ trip.duration_human }}</td>
-              <td class="text-right">{{ trip.distance|localize }} {{ request.user.profile.get_unit_of_measure_display }}</td>
-              <td class="text-right">{{ trip.avg_speed|localize }} {{ request.user.profile.get_unit_of_measure_display }}/h</td>
+              <td nowrap class="text-right">{{ trip.distance|localize }} {{ request.user.profile.get_unit_of_measure_display }}</td>
+              <td nowrap class="text-right">{{ trip.avg_speed|localize }} {{ request.user.profile.get_unit_of_measure_display }}/h</td>
             </tr>
           </tbody>
         </table>
