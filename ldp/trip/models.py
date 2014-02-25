@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.utils.timezone import localtime
 
 from utils.choices import Choices
 from utils.human import seconds_to_human
@@ -22,8 +23,8 @@ class Trip(models.Model):
     
     type = models.CharField(verbose_name=_('Type'), max_length=6, choices=TYPE_CHOICES, default=TYPE_CHOICES.PUMP)
     
-    start = models.DateTimeField(verbose_name=_('Start time'))
-    end = models.DateTimeField(verbose_name=_('End time'), editable=False)
+    start_utc = models.DateTimeField(verbose_name=_('Start time'))
+    end_utc = models.DateTimeField(verbose_name=_('End time'), editable=False)
     
     distance = models.DecimalField(verbose_name=_('Distance'), max_digits=5, decimal_places=2)
 
@@ -33,12 +34,12 @@ class Trip(models.Model):
     avg_speed = models.DecimalField(_('Avg. Speed'), max_digits=5, decimal_places=2, editable=False)
 
     class Meta:
-        ordering = ['-start']
+        ordering = ['-start_utc']
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         
-        self.end = self.start + self.duration
+        self.end_utc = self.start_utc + self.duration
         
         tick = self.distance / self.duration.seconds
         
@@ -50,6 +51,14 @@ class Trip(models.Model):
     def __unicode__(self):
         return "%s trip from %s to %s distance %d" %(self.skater, str(self.start), str(self.end), self.distance)
 
+    @property
+    def start(self):
+        return localtime(self.start_utc)
+    
+    @property
+    def end(self):
+        return localtime(self.end_utc)
+    
     def get_absolute_url(self):
         return reverse('trip_detail', kwargs={'pk':self.id})
     

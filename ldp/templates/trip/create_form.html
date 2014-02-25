@@ -7,9 +7,9 @@
 </div>
 <div class="row">
   <div class="large-12 columns">
-    {{ trip_form.start.label_tag }}
-    {{ trip_form.start }}
-    {% include "floppyforms/errors.html" with errors=trip_form.start.errors %}
+    {{ trip_form.start_utc.label_tag }}
+    {{ trip_form.start_utc }}
+    {% include "floppyforms/errors.html" with errors=trip_form.start_utc.errors %}
   </div>
 </div>
 <div class="row">

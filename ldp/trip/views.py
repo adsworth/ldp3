@@ -105,7 +105,7 @@ class TripListView(SortMixin, ListView):
         elif sort_by == 'skater':
             qs = qs.order_by('skater')
         elif sort_by == 'start':
-            qs = qs.order_by('start')
+            qs = qs.order_by('start_utc')
 
         if descending == True:
             qs = qs.reverse()
@@ -117,7 +117,7 @@ class TripListView(SortMixin, ListView):
         if self.request.user.is_authenticated() == False:
             privacy = privacy + ['registered', ]
             
-        return Trip.objects.exclude(skater__profile__privacy__in=privacy)
+        return super(TripListView, self).get_queryset().exclude(skater__profile__privacy__in=privacy)
 
 class TripCreateView(CreateView):
     model = Trip
