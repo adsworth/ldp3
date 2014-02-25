@@ -25,31 +25,36 @@
              <li><a class="button" href="{% url 'userena_profile_detail' user.username %}">{{ user.username }}</a></li>
            {% endif %}
           <li>
-           {% if not user.is_authenticated %}
-             <a class="button" href="{% url 'userena_signin' %}?n={{ request.path }}">Login</a>
-           {% else %}
-             <a class="button" href="{% url 'userena_signout' %}">Logout</a>
-           {% endif %}
-          </li>
-           {% if user.is_staff %}
-          <li><a class="button" href="{% url 'admin:index' %}">Admin</a></li>
-           {% endif %}
-         </ul>
+            {% if not user.is_authenticated %}
+              <a class="button" href="{% url 'userena_signin' %}?n={{ request.path }}">Login</a>
+            {% else %}
+              <a class="button" href="{% url 'userena_signout' %}">Logout</a>
+            {% endif %}
+            </li>
+          {% if user.is_staff %}
+            <li><a class="button" href="{% url 'admin:index' %}">Admin</a></li>
+          {% endif %}
+        </ul>
+        <ul>
+          <li class="hide-for-medium-up"><a href="#new_trip">New Trip</a></li>
+          <li class="hide-for-medium-up"><a href="{% url 'userena_profile_list' %}">Skaters</a></li>
+          <li class="hide-for-medium-up"><a href="{% url 'trip_list' %}">Trips</a></li>
+        </ul>       
        </nav>
       </div>
   <!-- End Header and Nav -->
   <div class="row">
  <!-- Nav Sidebar -->
     <!-- This is source ordered to be pulled to the left on larger screens -->
-    <div class="large-3 columns ">
-      <div class="panel">
+    <div class="large-3 columns">
+      <div class="panel hide-for-small-only">
         <h1>LDP³</h1>
         <p class="right">(Push|Pump|Paddle)</p>
         <p>&nbsp;</p>
       </div>
       <div class="panel">
       {% block navigation %}
-        <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+        <div class="section-container vertical-nav hide-for-small-only" data-section data-options="deep_linking: false; one_up: true">
           <section class="section">
             <h5 class="title"><a href="{% url 'userena_profile_list' %}">Skaters</a></h5>
           </section>
@@ -62,6 +67,7 @@
       {% block side_panel %}
         {% if request.user.is_authenticated %}
           <div class="panel">
+            <a name="new_trip"></a>
            <h5>add a new trip</h5>
            <form action="{% url 'trip_create' %}" method="post">
            {% csrf_token %}
