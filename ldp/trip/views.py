@@ -93,7 +93,7 @@ class FilterMixin(object):
         return context
 
 class TripListView(SortMixin, ListView):
-    default_sort_param = ('-start')
+    default_sort_param = ('-start_utc')
     param_name_sort = 's'
 
     model = Trip
@@ -106,6 +106,10 @@ class TripListView(SortMixin, ListView):
             qs = qs.order_by('skater')
         elif sort_by == 'start':
             qs = qs.order_by('start_utc')
+        elif sort_by == 'duration':
+            qs = qs.order_by('duration')
+        elif sort_by == 'avg_speed':
+            qs = qs.order_by('avg_speed')
 
         if descending == True:
             qs = qs.reverse()

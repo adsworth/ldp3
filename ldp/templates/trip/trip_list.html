@@ -7,11 +7,11 @@
 {% block content %}
     <dl class="sub-nav">
       <dt>Sort:</dt>
-      <dd><a href="{% url 'trip_list' %}?s=skater">Skater</a></dd>
-      <dd><a href="{% url 'trip_list' %}?s=-dist">Distance</a></dd>
-      <dd><a href="{% url 'trip_list' %}?s=start">Start</a></dd>
-      <dd><a href="{% url 'trip_list' %}?s=avg_speed">Duration</a></dd>
-      <dd><a href="{% url 'trip_list' %}?s=avg_speed">Avg. Speed</a></dd>
+      <dd {%if sort_by == 'skater' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=skater">Skater</a></dd>
+      <dd {%if sort_by == '-dist' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=-dist">Distance</a></dd>
+      <dd {%if sort_by == 'start' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=start">Start</a></dd>
+      <dd {%if sort_by == '-duration' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=-duration">Duration</a></dd>
+      <dd {%if sort_by == '-avg_speed' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=-avg_speed">Avg. Speed</a></dd>
     </dl>
     <hr>
   {% for trip in object_list %}
