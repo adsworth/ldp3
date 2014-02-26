@@ -6,12 +6,12 @@ input, textarea, select {
     padding: 0.1rem !important;
     height: 1.75rem !important;
 }
-#id_start_0, #id_end_0, #id_distance {
+#id_start_utc_0, #id_distance {
     width:5.75rem;
     display:inline;
 }
 
-#id_start_1, #id_end_1 {
+#id_start_utc_1 {
     width:4.75rem;
     display:inline;
 }

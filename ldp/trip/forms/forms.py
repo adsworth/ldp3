@@ -10,8 +10,8 @@ class TripForm(floppyforms.ModelForm):
     class Meta:
         model = Trip
         exclude = ['skater', 'end', 'avg_speed']
-        localized_fields = ('start', 'duration', 'distance')
+        localized_fields = ('start_utc', 'duration', 'distance')
         widgets = {
-            'start': SplitDateTimeWidget(date_placeholder="DD.MM.YYYY", time_placeholder="HH:MM"),
+            'start_utc': SplitDateTimeWidget(date_placeholder="DD.MM.YYYY", time_placeholder="HH:MM"),
             'duration': TimedeltaWidget(attrs={'placeholder':"1d 2h 3m 4s"}),
         }

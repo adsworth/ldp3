@@ -6,8 +6,7 @@ register = template.Library()
 
 @register.inclusion_tag('trip/create_form.html')
 def trip_create_form(user):
-    return {'trip_form': TripForm(initial= {'start': datetime.combine(date.today(), time()),
-                                            'end': datetime.combine(date.today(), time())
+    return {'trip_form': TripForm(initial= {'start_utc': datetime.combine(date.today(), time()),
                                             }),
             'user': user 
             }
