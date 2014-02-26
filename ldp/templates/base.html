@@ -1,5 +1,6 @@
 {% extends 'foundation/base.html' %}
 {% load i18n %}
+{% load piwik_tags %}
 {% load url from future %}
 {% load trip_tags %}
 {% block css %}
@@ -102,3 +103,7 @@
     </div>
   </footer>
 {% endblock base_body %}
+
+{% block body_js %}
+  {% tracking_code %}
+{% endblock body_js %}

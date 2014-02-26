@@ -7,6 +7,7 @@ django-flatblocks==0.8
 django-floppyforms==1.1.1
 django-guardian==1.1.1
 django-markdown-deux==1.0.4
+django-piwik==0.1
 django-timedeltafield==0.7.1
 django-userena==1.2.4
 django-zurb-foundation==5.1.1

@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'trip',
     'flatblocks',
     'south',
+    'piwik',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -98,6 +99,8 @@ ROOT_URLCONF = 'ldp.urls'
 
 WSGI_APPLICATION = 'ldp.wsgi.application'
 
+PIWIK_SITE_ID = 1
+PIWIK_URL = 'http://p.adi.io/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
