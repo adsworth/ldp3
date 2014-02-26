@@ -34,6 +34,7 @@ if PRODUCTION:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    INTERNAL_IPS = ('127.0.0.1',)
 
 DATABASES = {
     'default': {

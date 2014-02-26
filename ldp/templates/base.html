@@ -105,5 +105,7 @@
 {% endblock base_body %}
 
 {% block body_js %}
-  {% tracking_code %}
+  {% if not debug %}
+    {% tracking_code %}
+  {% endif %}
 {% endblock body_js %}
