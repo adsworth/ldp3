@@ -32,11 +32,11 @@
             {% endif %}
             {% if profile.about_me %}
               <dt>{% trans "About me" %}</dt>
-              <dd>{{ profile.about_me }}</dd>
+              <dd>{{ profile.about_me|linebreaks }}</dd>
             {% endif %}
             {% if profile.gear %}
               <dt>{% trans "Skate Gear" %}</dt>
-              <dd>{{ profile.gear }}</dd>
+              <dd>{{ profile.gear|linebreaks }}</dd>
             {% endif %}
           {% endblock %}
         </dl>
