@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'easy_thumbnails',
     'markdown_deux',
     'floppyforms',
     'foundation',
