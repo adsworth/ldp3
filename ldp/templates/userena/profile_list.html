@@ -27,7 +27,7 @@
         </a>
         <br>
         skated {{ profile.total_distance }} {{ profile.get_unit_of_measure_display }} in {{ profile.total_duration_human }} during {{ profile.number_of_trips }} trip.<br>
-        That's an average speed of {{ profile.avg_speed }} {{ profile.get_unit_of_measure_display }}/h and an average of {{ profile.avg_distance }} {{ profile.get_unit_of_measure_display }} per trip.
+        That's an average speed of {{ profile.avg_speed|floatformat:-2 }} {{ profile.get_unit_of_measure_display }}/h and an average of {{ profile.avg_distance|floatformat:-2 }} {{ profile.get_unit_of_measure_display }} per trip.
         </p>
       </div>
     </div>
