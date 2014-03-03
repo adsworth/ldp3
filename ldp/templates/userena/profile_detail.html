@@ -54,12 +54,15 @@
           <tbody>
             <tr>
               <td class="text-right">{{ profile.number_of_trips }}</td>
-              <td class="text-right">{{ profile.total_distance }} {{ profile.get_unit_of_measure_display }}</td>
+              <td class="text-right">{{ profile.total_distance|floatformat:-2 }} {{ profile.get_unit_of_measure_display }}</td>
               <td class="text-right">{{ profile.total_duration_human }}</td>
-              <td class="text-right">{{ profile.avg_speed }} {{ profile.get_unit_of_measure_display }}/h</td>
-              <td class="text-right">{{ profile.avg_distance }} {{ profile.get_unit_of_measure_display }}</td>
+              <td class="text-right">{{ profile.avg_speed|floatformat:-2 }} {{ profile.get_unit_of_measure_display }}/h</td>
+              <td class="text-right">{{ profile.avg_distance|floatformat:-2 }} {{ profile.get_unit_of_measure_display }}</td>
             </tr>
           </tbody>
         </table>
     </div>
-{% endblock %}
+{% endblock profile_content %}
+{% block navigation %}
+  {% include 'skater_navigation.html' with profile=profile %}
+{% endblock navigation %}

@@ -1,4 +1,5 @@
 {% extends 'foundation/base.html' %}
+{% load comparison %}
 {% load i18n %}
 {% load piwik_tags %}
 {% load url from future %}
@@ -37,9 +38,13 @@
           {% endif %}
         </ul>
         <ul>
+          <li class="divider"></li>
+          {% url 'ldp3_profile_list' as skater_url %}
+          <li class="{% if_startswith request.path skater_url %}active{% endif_startswith %}"><a href="{{ skater_url }}">Skaters</a></li>
+          <li class="divider"></li>
+          {% url 'trip_list' as trip_url %}
+          <li class="{% if_startswith request.path trip_url %}active{% endif_startswith %}"><a href="{{ trip_url }}">Trips</a></li>
           <li class="hide-for-medium-up"><a href="#new_trip">New Trip</a></li>
-          <li class="hide-for-medium-up"><a href="{% url 'userena_profile_list' %}">Skaters</a></li>
-          <li class="hide-for-medium-up"><a href="{% url 'trip_list' %}">Trips</a></li>
         </ul>       
        </nav>
       </div>
@@ -58,18 +63,8 @@
         <p class="right">(Push|Pump|Paddle)</p>
         <p>&nbsp;</p>
       </div>
-      <div class="panel show-for-large-up">
       {% block navigation %}
-        <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
-          <section class="section">
-            <h5 class="title"><a href="{% url 'userena_profile_list' %}">Skaters</a></h5>
-          </section>
-          <section class="section">
-            <h5 class="title"><a href="{% url 'trip_list' %}">Trips</a></h5>
-          </section>
-        </div>
        {% endblock navigation %}
-      </div>
       {% block side_panel %}
         {% if request.user.is_authenticated %}
           <div class="panel">

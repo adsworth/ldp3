@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -93,14 +94,14 @@ class FilterMixin(object):
         return context
 
 class TripListView(SortMixin, ListView):
-    default_sort_param = ('-start_utc')
+    default_sort_param = ('-start')
     param_name_sort = 's'
 
     model = Trip
-    paginate_by = 20
+    paginate_by = 2
 
     def sort_queryset(self, qs, sort_by, descending):
-        if sort_by == 'dist':
+        if sort_by == 'distance':
             qs = qs.order_by('distance')
         elif sort_by == 'skater':
             qs = qs.order_by('skater')
@@ -123,6 +124,34 @@ class TripListView(SortMixin, ListView):
             
         return super(TripListView, self).get_queryset().exclude(skater__profile__privacy__in=privacy)
 
+class SkaterTripListView(TripListView):
+    
+    def dispatch(self, *args, **kwargs):
+        self.skater = get_object_or_404(get_user_model(), username=kwargs['username'])
+        
+        if self.skater.profile.privacy == 'registered' and \
+           self.request.user.is_authenticated() == False:
+            raise PermissionDenied
+        elif self.skater.profile.privacy == 'closed' and \
+             self.skater <> self.request.user:
+            raise PermissionDenied
+
+        return super(SkaterTripListView, self).dispatch(*args, **kwargs)
+
+    def get_template_names(self):
+        return ['trip/skater_trip_list.html',]
+
+    def get_queryset(self):
+        return super(SkaterTripListView, self).get_queryset().filter(skater=self.skater)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(SkaterTripListView, self).get_context_data(*args, **kwargs)
+        context.update({
+            'skater': self.skater,
+        })
+        return context
+
+
 class TripCreateView(CreateView):
     model = Trip
     context_object_name = 'trip'
@@ -133,12 +162,6 @@ class TripCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(TripCreateView, self).dispatch(*args, **kwargs)
     
-#    def form_valid(self, form):
-#        object = form.save(commit=False)
-#        object.skater = self.request.user
-#        object.save()
-#        return super(TripCreateView, self).form_valid(form)
-
     def get_form_kwargs(self):
         _kwargs = super(TripCreateView, self).get_form_kwargs()
         
@@ -171,7 +194,7 @@ class TripDetailView(DetailView):
 
     def get_object(self, *args, **kwargs):
         _object = super(TripDetailView, self).get_object(*args, **kwargs)
-        
+
         if _object.skater.profile.privacy == 'registered' and \
            self.request.user.is_authenticated() == False:
             raise PermissionDenied

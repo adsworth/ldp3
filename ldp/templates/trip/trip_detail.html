@@ -7,7 +7,7 @@
 {% block content %}
     <div class="row">
       <div class="large-2 columns small-3">
-        <a href="{% url 'userena_profile_detail' trip.skater.username %}">
+        <a class="th" href="{% url 'userena_profile_detail' trip.skater.username %}">
           <img src="{{ trip.skater.profile.get_mugshot_url }}">
         </a>
         </div>

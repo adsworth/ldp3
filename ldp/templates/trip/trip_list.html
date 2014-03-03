@@ -3,21 +3,21 @@
 {% load l10n %}
 {% load url from future %}
 {% block title %}Trips - {{ block.super }}{% endblock title %}
-{% block content_title %}<h2>Trips</h2>{% endblock content_title %}
+{% block content_title %}<h2>All Trips</h2>{% endblock content_title %}
 {% block content %}
     <dl class="sub-nav">
       <dt>Sort:</dt>
       <dd {%if sort_by == 'skater' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=skater">Skater</a></dd>
-      <dd {%if sort_by == '-dist' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=-dist">Distance</a></dd>
-      <dd {%if sort_by == 'start' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=start">Start</a></dd>
+      <dd {%if sort_by == '-start' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=-start">Start</a></dd>
       <dd {%if sort_by == '-duration' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=-duration">Duration</a></dd>
+      <dd {%if sort_by == '-distance' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=-distance">Distance</a></dd>
       <dd {%if sort_by == '-avg_speed' %}class="active"{% endif %}><a href="{% url 'trip_list' %}?s=-avg_speed">Avg. Speed</a></dd>
     </dl>
     <hr>
   {% for trip in object_list %}
     <div class="row">
       <div class="large-2 columns small-3">
-        <a href="{% url 'userena_profile_detail' trip.skater.username %}">
+        <a class="th" href="{% url 'userena_profile_detail' trip.skater.username %}">
           <img src="{{ trip.skater.profile.get_mugshot_url }}">
         </a>
         </div>
@@ -57,7 +57,7 @@
   {% if is_paginated %}
     <div class="row">
       <div class="large-12 pagination-centered">
-            {% include 'paginator.html' with paginator=paginator page=page url_name='trip_list' %}
+            {% include 'paginator.html' with paginator=paginator page_obj=page_obj url_name='trip_list' %}
       </div>
     </div>
   {% endif %}

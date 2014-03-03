@@ -58,6 +58,14 @@ class Trip(models.Model):
     @property
     def end(self):
         return localtime(self.end_utc)
+
+    @property
+    def start_formatted(self):
+        return localtime(self.end_utc)
+    
+    @property
+    def start_formatted(self):
+        return localtime(self.end_utc)
     
     def get_absolute_url(self):
         return reverse('trip_detail', kwargs={'pk':self.id})

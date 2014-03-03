@@ -5,8 +5,8 @@
   {% else %}
     <li class="arrow unavailable">&laquo;</li>
   {% endif %}
-  {% for p in paginator.page_range %}
-    <li class="current"><a href="{% url url_name %}?page={{ p }}">{{ p }}</a></li>
+  {% for page in paginator.page_range %}
+    <li class="{%if page == page_obj.number %}current{% endif %}"><a href="{% url url_name %}?page={{ page }}">{{ page }}</a></li>
   {% endfor %}
   {% if page_obj.has_next %}
     <li class="arrow"><a href="{% url url_name %}?page={{ page_obj.next_page_number }}">&raquo;</a></li>

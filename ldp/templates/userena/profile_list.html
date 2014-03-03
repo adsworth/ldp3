@@ -1,22 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'userena/base_userena.html' %}
 {% load i18n %}
 {% load url from future %}
 {% block title %}Skater - {{ block.super }}{% endblock title %}
 {% block content_title %}<h2>Skater</h2>{% endblock content_title %}
 {% block content %}
-<!--    <dl class="sub-nav">
-      <dt>Sort:</dt>
-      <dd class="active"><a href="{% url 'userena_profile_list' %}?s=name">Name</a></dd>
-      <dd><a href="{% url 'userena_profile_list' %}?s=dist">Distance</a></dd>
-      <dd><a href="{% url 'userena_profile_list' %}?s=num_trips">No. Trips</a></dd>
-      <dd><a href="{% url 'userena_profile_list' %}?s=avg_speed">Avg. Speed</a></dd>
-    </dl>
-    <hr>
--->
   {% for profile in profile_list %}
     <div class="row">
       <div class="large-2 columns small-3">
-        <a href="{% url 'userena_profile_detail' profile.user.username %}">
+        <a class="th" href="{% url 'userena_profile_detail' profile.user.username %}">
           <img src="{{ profile.get_mugshot_url }}">
         </a>
         </div>
@@ -36,7 +27,7 @@
   {% if is_paginated %}
     <div class="row">
       <div class="large-12 pagination-centered">
-            {% include 'paginator.html' with paginator=paginator page=page url_name='userena_profile_list' %}
+            {% include 'paginator.html' with paginator=paginator page_obj=page_obj url_name='ldp3_profile_list' %}
       </div>
     </div>
   {% endif %}
