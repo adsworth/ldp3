@@ -16,5 +16,5 @@ html2text==3.200.3
 markdown2==2.2.0
 psycopg2==2.5.2
 six==1.5.2
-template-utils==0.5
+-e git+https://github.com/justquick/django-template-utils@a280bfc73e70426c354af4fd6f34cb65edeb61dd#egg=template_utils-master
 wsgiref==0.1.2
