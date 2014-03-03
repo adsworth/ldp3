@@ -98,7 +98,7 @@ class TripListView(SortMixin, ListView):
     param_name_sort = 's'
 
     model = Trip
-    paginate_by = 2
+    paginate_by = 20
 
     def sort_queryset(self, qs, sort_by, descending):
         if sort_by == 'distance':
