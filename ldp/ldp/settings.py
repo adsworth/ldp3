@@ -144,6 +144,7 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+USERENA_REGISTER_PROFILE = False
 USERENA_SIGNIN_REDIRECT_URL = '/skater/%(username)s/'
 USERENA_FORBIDDEN_USERNAMES = ('signup', 'signout', 'signin', 
                                'activate', 'me', 'password') + ('a', 'admin', 'trips', 'trip', 'skater')
