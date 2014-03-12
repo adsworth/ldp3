@@ -11,6 +11,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
 
+from skater.models import privacy_exclude_for_user
 from trip.forms.forms import TripForm
 from trip.models import Trip
 
@@ -117,12 +118,7 @@ class TripListView(SortMixin, ListView):
         return qs
 
     def get_queryset(self):
-        privacy = ['closed',]
-
-        if self.request.user.is_authenticated() == False:
-            privacy = privacy + ['registered', ]
-            
-        return super(TripListView, self).get_queryset().exclude(skater__profile__privacy__in=privacy)
+        return super(TripListView, self).get_queryset().exclude(skater__profile__privacy__in=privacy_exclude_for_user(self.request.user))
 
 class SkaterTripListView(TripListView):
     

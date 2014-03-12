@@ -9,6 +9,14 @@ from userena.models import UserenaBaseProfile
 
 from timedelta.helpers import nice_repr
 
+def privacy_exclude_for_user(user):
+    privacy = ['closed',]
+    
+    if user.is_authenticated() == False:
+        privacy = privacy + ['registered', ]
+    return privacy
+
+
 class SkaterProfile(UserenaBaseProfile):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 unique=True,
