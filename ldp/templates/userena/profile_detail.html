@@ -1,7 +1,7 @@
 {% extends 'userena/base_userena.html' %}
 {% load i18n %}
 {% load url from future %}
-{% block title %}{{ profile.user.get_full_name }} - {{ block.super }}{% endblock title %}
+{% block title %}{{ skater.profile.get_full_name_or_username }} - {{ block.super }}{% endblock title %}
 {% block profile_content %}
     <div id="details">
       {% block profile_details %}
