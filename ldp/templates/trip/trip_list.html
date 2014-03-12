@@ -29,22 +29,20 @@
         <table width="100%">
           <thead>
             <tr>
-              <th width="25%">Start</th>
-              <th width="25%">End</th>
-              <th class="text-right" width="20%">Duration</th>
+              <th width="35%">Start</th>
+              <th width="35%">Duration</th>
               <th class="text-right" width="17%">Distance</th>
               <th nowrap width="13%" >Avg. Speed</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td nowrap class="text-right">
+              <td nowrap>
                 <a href="{% url 'trip_detail' trip.id %}">
-                  {{ trip.start.date }}<br>{{ trip.start.time }}
+                  {{ trip.start.date }} {{ trip.start.time }}
                 </a>
               </td>
-              <td class="text-right">{{ trip.end.date }}<br>{{ trip.end.time }}</td>
-              <td class="text-right">{{ trip.duration_human }}</td>
+              <td >{{ trip.duration_human }}</td>
               <td nowrap class="text-right">{{ trip.distance|localize }} {{ request.user.profile.get_unit_of_measure_display }}</td>
               <td nowrap class="text-right">{{ trip.avg_speed|localize }} {{ request.user.profile.get_unit_of_measure_display }}/h</td>
             </tr>
