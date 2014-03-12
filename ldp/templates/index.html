@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 {% load flatblock_tags %}
+{% load skater_tags %}
 {% block content %}
+
 {% flatblock "page.home" %}
+<div class="row">
+    <div class="large-4 columns panel">
+    <h3>Random Skater</h3>
+    {% random_skater request.user %}
+    </div>
+    <div class="large-8 columns">
+    </div>
+</div>
 {% endblock content %}
