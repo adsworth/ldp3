@@ -1,0 +1,12 @@
+{% load i18n %}<a href="{% url 'userena_profile_detail' action.actor.username %}">{{ action.actor.profile.get_full_name_or_username }}</a>
+{{ action.verb }} a 
+{% if action.action_object %}
+    {% if action.action_object.get_absolute_url %}<a href="{{ action.action_object.get_absolute_url }}">{{ action.action_object }}</a>
+    {% else %}<a href="{{ action.target_url }}">{{ action.action_object }}</a>{% endif %}
+{% endif %}
+{% if action.action_object and action.target %}to{% endif %}
+{% if action.target %}
+    {% if action.target.get_absolute_url %}<a href="{{ action.target.get_absolute_url }}">{{ action.target }}</a>
+    {% else %}<a href="{{ action.target_url }}">{{ action.target }}</a>{% endif %}
+{% endif %}
+{{ action.timestamp|timesince }} {% trans "ago" %}

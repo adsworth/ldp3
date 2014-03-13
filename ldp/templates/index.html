@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load flatblock_tags %}
 {% load skater_tags %}
+{% load activity_tags %}
 {% block content %}
 <div class="row">
 <div class="panel">
@@ -8,11 +9,15 @@
 </div>
 </div>
 <div class="row">
-    <div class="large-4 columns panel">
+    <div class="large-4 column panel">
     <h3>Random Skater</h3>
     {% random_skater request.user %}
     </div>
-    <div class="large-8 columns">
+    <div class="large-8 column panel">
+    <h3>Recent Activities</h3>
+    {% for activity in activities %}
+      {% display_action activity %}
+    {% endfor %}
     </div>
 </div>
 {% endblock content %}

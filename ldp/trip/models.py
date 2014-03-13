@@ -1,16 +1,18 @@
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
 from django.utils.timezone import localtime
+
+from actstream import action
+from timedelta.fields import TimedeltaField
+from timedelta.helpers import nice_repr
 
 from utils.choices import Choices
 from utils.human import seconds_to_human
 
-from django.conf import settings
-
-from timedelta.fields import TimedeltaField
-from timedelta.helpers import nice_repr
 
 class Trip(models.Model):
     TYPE_CHOICES = Choices((
@@ -49,7 +51,7 @@ class Trip(models.Model):
              update_fields=None)
 
     def __unicode__(self):
-        return "%s trip from %s to %s distance %d" %(self.skater, str(self.start), str(self.end), self.distance)
+        return "trip"
 
     @property
     def start(self):
@@ -72,3 +74,10 @@ class Trip(models.Model):
     
     def duration_human(self):
         return nice_repr(self.duration)
+
+
+
+def my_handler(sender, instance, created, **kwargs):
+    action.send(instance.skater, verb='created', action_object=instance)
+
+post_save.connect(my_handler, sender=Trip)

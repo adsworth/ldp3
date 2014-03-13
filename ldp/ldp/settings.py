@@ -77,6 +77,7 @@ INSTALLED_APPS = (
     'flatblocks',
     'south',
     'piwik',
+    'actstream',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -161,4 +162,11 @@ MARKDOWN_DEUX_STYLES = {
         # Allow raw HTML (WARNING: don't use this for user-generated
         # Markdown for your site!).
         "safe_mode": False,
-    }    }
+    }
+}
+
+ACTSTREAM_SETTINGS = {
+    'MODELS': ('auth.user', 'comments.comment', 'trip.Trip'),
+    'USE_JSONFIELD': True,
+}
+

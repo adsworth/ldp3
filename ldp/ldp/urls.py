@@ -12,6 +12,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'ldp.views.home', name='home'),
+    url('^activity/', include('actstream.urls')),
     url(r'^about/', TemplateView.as_view(template_name="about.html"), name='about'),
     url(r'^impressum/', TemplateView.as_view(template_name="impressum.html"), name='impressum'),
     url(r'^trips/?$', TripListView.as_view() , name='trip_list'),
