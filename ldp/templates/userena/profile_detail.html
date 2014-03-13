@@ -3,7 +3,8 @@
 {% load url from future %}
 {% block title %}{{ skater.profile.get_full_name_or_username }} - {{ block.super }}{% endblock title %}
 {% block profile_content %}
-    <div id="details">
+<div class="row">
+    <div id="details" class="column panel" >
       {% block profile_details %}
         <img class="mugshot" src="{{ profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
         <dl>
@@ -41,6 +42,10 @@
           {% endblock %}
         </dl>
       {% endblock %}
+    </div>
+</div>
+<div class="row">
+    <div class="column panel" >
         <table>
           <thead>
             <tr>
@@ -62,6 +67,7 @@
           </tbody>
         </table>
     </div>
+</div>
 {% endblock profile_content %}
 {% block navigation %}
   {% include 'skater_navigation.html' with profile=profile %}

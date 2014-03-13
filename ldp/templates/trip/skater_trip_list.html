@@ -5,14 +5,14 @@
 {% block title %}{{ skater.profile.get_full_name_or_username }} trips - {{ block.super }}{% endblock title %}
 {% block content_title %}<h2>{{ skater.profile.get_full_name_or_username}}{{ object_list|length|pluralize }} - Trips</h2>{% endblock content_title %}
 {% block content %}
-  <div class="row">
+  <div class="row panel">
     <div class="large-2 columns">
       <a class="th" href="{% url 'userena_profile_detail' skater.username %}">
         <img src="{{ skater.profile.get_mugshot_url }}">
       </a>
-      <p>
+      <p class="text-center">
         <a href="{% url 'userena_profile_detail' skater.username %}">
-          <strong>{{ skater.username }}</strong>
+          <strong>{{ skater.profile.get_full_name_or_username }}</strong>
         </a>
       </p>
     </div>
