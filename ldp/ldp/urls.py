@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from userena.views import ProfileListView
 
 from trip.views import SkaterTripListView, TripListView, TripDetailView, TripCreateView, TripUpdateView
-
+from ldp.views import skater_activities
 
 admin.autodiscover()
 
@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^trip/new/?$', TripCreateView.as_view() , name='trip_create'),
     url(r'^trip/edit/(?P<pk>\d+)/?$', TripUpdateView.as_view() , name='trip_edit'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^(?P<username>(?!signout|signup|signin)[\.\w-]+)/activities/$', skater_activities, name='skater_activities'),
     url(r'^(?P<username>(?!signout|signup|signin)[\.\w-]+)/trips/$', SkaterTripListView.as_view() , name='skater_trip_list'),
     url(r'^skater/', ProfileListView.as_view(), name='ldp3_profile_list'),
     url(r'^a/', include(admin.site.urls)),

@@ -1,8 +1,10 @@
+{% load activity_tags %}
 <div class="panel show-for-large-up">
   {% block navigation_content %}
 <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
   <section class="section">
     <h5 class="title"><a href="{% url 'skater_trip_list' profile.user.username %}">Trips</a></h5>
+    <h5 class="title"><a href="{% url 'skater_activities' profile.user.username %}">Activities</a></h5>
   </section>
 </div>
   {% endblock navigation_content %}
