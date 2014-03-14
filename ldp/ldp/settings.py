@@ -29,6 +29,8 @@ DEBUG = not PRODUCTION
 
 TEMPLATE_DEBUG = DEBUG
 
+ADMINS = (('Adi', 'adi@sieker.io'),)
+
 if PRODUCTION:
     FORCE_SCRIPT_NAME = ''
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
