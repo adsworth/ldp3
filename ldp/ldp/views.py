@@ -6,7 +6,7 @@ from actstream.models import model_stream
 from actstream.views import actor
 
 def home(request):
-    return render(request, "index.html", {'activities': model_stream(request.user)[:10] })
+    return render(request, "index.html", {'activities': model_stream(get_user_model())[:10] })
 
 def skater_activities(request, username):
     user = get_object_or_404(get_user_model(), username=username)
