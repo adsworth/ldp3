@@ -1,9 +1,13 @@
 {% load i18n %}
 <div class="text-center">
-<img class="mugshot th" src="{{ skater.profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
-<p>
-  <a href="{% url 'userena_profile_detail' skater.username %}">
-    <strong>{{ skater.profile.get_full_name_or_username }}</strong>
-  </a>
-</p>
+  {% if skater %}
+    <img class="mugshot th" src="{{ skater.profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
+    <p>
+      <a href="{% url 'userena_profile_detail' skater.username %}">
+        <strong>{{ skater.profile.get_full_name_or_username }}</strong>
+      </a>
+    </p>
+  {% else %}
+    <p>Next time maybe. :)</p>  
+  {% endif %}
 </div>
