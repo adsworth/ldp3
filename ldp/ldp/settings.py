@@ -29,7 +29,8 @@ DEBUG = not PRODUCTION
 
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (('Adi', 'adi@sieker.io'),)
+ADMINS = SECRETS.get('admins', [])
+SERVER_EMAIL = SECRETS.get('server_email', '')
 
 if PRODUCTION:
     FORCE_SCRIPT_NAME = ''
