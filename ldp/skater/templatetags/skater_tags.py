@@ -11,7 +11,7 @@ register = template.Library()
 
 @register.inclusion_tag('skater/random_skater.html')
 def random_skater(user):
-    skater = User.objects.exclude(id=settings.ANONYMOUS_USER_ID).exclude(profile__privacy__in=privacy_exclude_for_user(user)).order_by('?')[:1]
+    skater = User.objects.exclude(profile=None).exclude(profile__privacy__in=privacy_exclude_for_user(user)).order_by('?')[:1]
     if len(skater) <> 0:
         skater = skater[0]
 

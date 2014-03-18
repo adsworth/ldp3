@@ -1,6 +1,6 @@
 {% load i18n %}
 <div class="text-center">
-  {% if skater.username %}
+  {% if skater %}
     <img class="mugshot th" src="{{ skater.profile.get_mugshot_url }}" alt="{% trans "Your mugshot" %}" />
     <p>
       <a href="{% url 'userena_profile_detail' skater.username %}">
