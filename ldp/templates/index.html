@@ -15,9 +15,13 @@
     </div>
     <div class="large-8 column panel">
     <h3>Recent Activities</h3>
+    <ul class="no-bullet">
     {% for activity in activities %}
-      {% display_action activity %}
+      <li>
+        {% display_action activity %}
+      </li>
     {% endfor %}
+    </ul>
     </div>
 </div>
 {% endblock content %}
