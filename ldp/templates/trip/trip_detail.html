@@ -14,7 +14,7 @@
       <div class="large-10 columns">
         <p>
           <a href="{% url 'userena_profile_detail' trip.skater.username %}">
-            <strong>{{ trip.skater.username }}</strong>
+            <strong>{{ trip.skater.profile.get_full_name_or_username }}</strong>
           </a>
         </p>
         <table>
