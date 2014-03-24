@@ -60,7 +60,7 @@ class SkaterProfile(UserenaBaseProfile):
     
     @cached_property
     def avg_speed(self):
-        if self.total_duration.seconds > 0:
-            return self.total_distance / self.total_duration.seconds * ( 60 *60 )
+        if self.total_duration.total_seconds() > 0:
+            return float(self.total_distance) / self.total_duration.total_seconds() * ( 60 * 60 )
         else:
             return None
